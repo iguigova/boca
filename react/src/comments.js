@@ -13,32 +13,32 @@ function Avatar(props) {
 
 function User(props) {
   return (
-    <div className="User">
+    <span className="User">
       <Avatar user={props.user} />
-      <div className="Username">
+      <span className="Username">
         {props.user.name}
-      </div>
-    </div>
+      </span>
+    </span>
   );
 }
 
 function Comment(props) {
   return (
-    <div className="Comment">
+    <span className="Comment">
       <User user={props.author} />
-      <div className="Comment-text">
+      <span className="Comment-date">
+          : {formatDate(props.date)} : 
+      </span>
+      <span className="Comment-text">
         {props.text}
-      </div>
-      <div className="Comment-date">
-        {formatDate(props.date)}
-      </div>
-    </div>
+      </span>
+    </span>
   );
 }
 
 function Comments(props){
     //const comments = props.comments;
-    const comments = props.comments.map((comment) => <Comment date={comment.date} text={comment.text} author={comment.author}/>);
+    const comments = props.comments.map((comment) => <div><Comment date={comment.date} text={comment.text} author={comment.author}/></div>);
 
     return (
       <div className="Comments">
@@ -47,15 +47,24 @@ function Comments(props){
     );
 }
 
+// https://dmitripavlutin.com/controlled-inputs-using-react-hooks/
+// https://www.robinwieruch.de/react-add-item-to-list
 function Commentator(props){
+    const [comments, addComment] = React.useState(props.comments);
+    const [comment, setComment] = React.useState('Hi');
+    
+    function onChange(event){ setComment(event.target.value);}
+    function onSubmit(){ addComment(comments.concat({comment})); setComment('');}
+    
     return <div>
       <input 
         type="text" 
         name="commentator" 
         placeholder="Enter comment here..." 
-        value="test"
-        //onChange={ this.handleChange } 
-      />      
+        value={comment}
+        onChange={onChange} 
+      />
+      <button type="button" onClick={onSubmit}>Submit</button>   
     </div>;
 }
 
@@ -66,7 +75,7 @@ function App(props){
           <Comments comments={props.comments}/>
         </div>
         <div className="Commentator">
-          <Commentator/>
+            <Commentator comments={props.comments}/>
         </div>
       </div>            
       );
