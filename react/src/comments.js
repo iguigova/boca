@@ -49,13 +49,7 @@ function Comments(props){
 
 // https://dmitripavlutin.com/controlled-inputs-using-react-hooks/
 // https://www.robinwieruch.de/react-add-item-to-list
-function Commentator(props){
-    const [comments, addComment] = React.useState(props.comments);
-    const [comment, setComment] = React.useState('Hi');
-    
-    function onChange(event){ setComment(event.target.value);}
-    function onSubmit(){ addComment(comments.concat({comment})); setComment('');}
-    
+function Commentator({comment, onChange, onSubmit}){
     return <div>
       <input 
         type="text" 
@@ -69,13 +63,19 @@ function Commentator(props){
 }
 
 function App(props){
+    const [comments, addComment] = React.useState(props.comments);
+    const [comment, setComment] = React.useState();
+    
+    function handleChange(event){ setComment(event.target.value);}
+    function handleSubmit(){ addComment(comments.concat({date: new Date(), text: comment, author: authors[0]})); setComment('');}
+    
     return (
       <div>
-        <div className="Comments">
-          <Comments comments={props.comments}/>
+        <div>
+          <Comments comments={comments}/>
         </div>
-        <div className="Commentator">
-            <Commentator comments={props.comments}/>
+        <div>
+            <Commentator comment={comment} onChange={handleChange} onSubmit={handleSubmit}/>
         </div>
       </div>            
       );
