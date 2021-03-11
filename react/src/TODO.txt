@@ -1,0 +1,7 @@
+- change babel's dist folder
+- move examples
+- split components
+- time
+- commentator - textarea, avatar
+- list of user/filters
+- comments - scrollable
