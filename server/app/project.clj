@@ -13,7 +13,8 @@
   ;;        :destroy icebreaker.handler/destroy}
   :main ^:skip-aot icebreaker.handler
   :profiles
-  {:uberjar {:aot :all}
+  {:uberjar {:aot :all
+             :uberjar-name "icebreaker.jar"}
    :production
    {:ring
     {:open-browser? false, :stacktraces? false, :auto-reload? false}}

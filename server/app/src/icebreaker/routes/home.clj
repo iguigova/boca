@@ -1,5 +1,6 @@
 (ns icebreaker.routes.home
   (:require [compojure.core :refer [defroutes GET]]
+            [ring.util.response :refer [resource-response]]
             [icebreaker.views.layout :as layout]))
 
 (defn home []
@@ -17,4 +18,6 @@
 
 (defroutes home-routes
   (GET "/" [] (home))
-  (GET "/about" [] (about)))
+  (GET "/about" [] (about))
+  (GET  "/test" [] (resource-response "test.html" {:root "public"}))
+  )

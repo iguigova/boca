@@ -1,5 +1,5 @@
 (ns icebreaker.handler
-  (:require [compojure.core :refer [defroutes routes]]
+  (:require [compojure.core :refer [defroutes routes GET]]
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.reload :as reload]
@@ -10,7 +10,8 @@
             [icebreaker.routes.home :refer [home-routes]]
             [icebreaker.routes.websockets :refer [websocket-routes]]
             [icebreaker.environment :as environment]
-            ))
+            )
+  (:gen-class))
 
 (defn init []
   (println "icebreaker is starting"))
@@ -18,18 +19,24 @@
 (defn destroy []
   (println "icebreaker is shutting down"))
 
-(defroutes app-routes  
+(defroutes app-routes
   (route/resources "/")
-  (route/files "/public")
+  ;; (route/files "/public")  
   (route/not-found "Not Found"))
 
+(def E (environment/context))
+
+(def final-routes
+  (if (:production E)
+    (routes home-routes websocket-routes app-routes)
+    (routes #'home-routes #'websocket-routes #'app-routes)))
+
 (def app
-  (-> (routes home-routes websocket-routes app-routes)
+  (-> final-routes
       (handler/site)
       (wrap-base-url)))
 
 (defn -main [& args]
-  (let [{:keys [production port]} (environment/context)
-        handler (if production app (reload/wrap-reload #'app))]    
-    (println "server started at port" port)
-    (run-server handler {:port port})))
+  (let [handler (if (:production E) app (reload/wrap-reload #'app))]    
+    (println "server started at port" (:port E))
+    (run-server handler {:port (:port E)})))
