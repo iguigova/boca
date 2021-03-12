@@ -1,5 +1,5 @@
-- change babel's dist folder
-- move examples
+- done: change babel's dist folder
+- done: move examples
 - split components
 - time
 - commentator - textarea, avatar
