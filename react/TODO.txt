@@ -1,7 +1,7 @@
 - done: change babel's dist folder
 - done: move examples
-- split components
-- time
+- done: split components
+- done: time
 - commentator - textarea, avatar
 - list of user/filters
 - comments - scrollable
