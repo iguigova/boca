@@ -6,6 +6,14 @@ divX:nth-child(even){
     background-color: #f2f2f2;
 }
 
-Comment:hover {
+.username1{
+    font: 15px Sofia;
+}
+
+.username,.comment-date{
+    font: 10px Courier New;
+}
+
+.comment:hover {
     background-color: #ddd;
 }

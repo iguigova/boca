@@ -6,12 +6,12 @@ function formatDate(date) {
 
 function Comment(props) {
   return (
-    <span className="Comment">
+    <span className="comment">
       <User user={props.author} />
-      <span className="Comment-date">
+      <span className="comment-date">
         {formatDate(props.timestamp)}
       </span>
-      <span className="Comment-text">
+      <span className="comment-text">
         {props.text}
       </span>
     </span>
