@@ -1,7 +1,7 @@
 import { User } from '/dist/user.js'
 
 function formatDate(date) {
-    return date.toLocaleString();
+    return date.toLocaleTimeString(); //toLocaleString();
 }
 
 function Comment(props) {
@@ -9,7 +9,7 @@ function Comment(props) {
     <span className="Comment">
       <User user={props.author} />
       <span className="Comment-date">
-          : {formatDate(props.timestamp)} : 
+        {formatDate(props.timestamp)}
       </span>
       <span className="Comment-text">
         {props.text}

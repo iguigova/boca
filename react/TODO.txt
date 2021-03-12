@@ -5,3 +5,7 @@
 - commentator - textarea, avatar
 - list of user/filters
 - comments - scrollable
+- hover
+- actions on comments
+- styles
+- fix warnings in console
