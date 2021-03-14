@@ -8,6 +8,7 @@
             [compojure.handler :as handler]
             [compojure.route :as route]
             [icebreaker.routes.home :refer [home-routes]]
+            [icebreaker.routes.json :refer [json-routes]]
             [icebreaker.routes.websockets :refer [websocket-routes]]
             [icebreaker.environment :as environment]
             )
@@ -28,8 +29,8 @@
 
 (def final-routes
   (if (:production E)
-    (routes home-routes websocket-routes app-routes)
-    (routes #'home-routes #'websocket-routes #'app-routes)))
+    (routes home-routes json-routes websocket-routes app-routes)
+    (routes #'home-routes #'json-routes #'websocket-routes #'app-routes)))
 
 (def app
   (-> final-routes
