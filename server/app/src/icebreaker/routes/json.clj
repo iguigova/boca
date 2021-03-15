@@ -22,5 +22,5 @@
 
 (defroutes json-routes
   (GET "/request-example" [] request-example)
-  (GET "/*" [] json-handler)
+  (GET "/json/*" [] json-handler)
   )
