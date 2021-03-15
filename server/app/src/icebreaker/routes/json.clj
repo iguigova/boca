@@ -7,13 +7,20 @@
 (defn addjson [json]
   (swap! json-collection conj json))
 
-(addjson {:name "jsontest"})
+;(addjson {:name "jsontest"})
 
-(defn json-handler []
+(defn json-handler [request]
+  (addjson {:uri (:uri request)})
   {:status 200
    :headers {"Content-Type" "text/json"}
    :body (str (json/write-str @json-collection))})
 
+(defn request-example [request]
+     {:status  200
+      :headers {"Content-Type" "text/html"}
+      :body (str "Request Object: " request "\nRequest uri: " (:uri request))})
+
 (defroutes json-routes
-  (GET "/*" [] (json-handler))
+  (GET "/request-example" [] request-example)
+  (GET "/*" [] json-handler)
   )
