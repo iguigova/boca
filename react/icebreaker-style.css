@@ -6,14 +6,39 @@ divX:nth-child(even){
     background-color: #f2f2f2;
 }
 
-.username1{
+.username{
     font: 15px Sofia;
 }
 
-.username,.comment-date{
+.comment-date{
     font: 10px Courier New;
 }
 
 .comment:hover {
     background-color: #ddd;
+}
+
+/*
+.modal {
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+*/
+
+.modal-content {
+    background-color: white;
+    position: absolute; 
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+.modal-close {
+    color: black;
+    float: right;
+}
+
+.modal-close:hover {
+    color: red;
+    cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import { App } from '/dist/icebreaker-app.js'
+import { App } from '/dist/app.js'
 import { uuid, users, comments} from '/dist/data.js'
 
 ReactDOM.render(
