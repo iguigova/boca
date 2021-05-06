@@ -15,12 +15,12 @@
    :headers {"Content-Type" "text/json"}
    :body (str (json/write-str @json-collection))})
 
-(defn request-example [request]
+(defn json-request-echo [request]
      {:status  200
       :headers {"Content-Type" "text/html"}
       :body (str "Request Object: " request "\nRequest uri: " (:uri request))})
 
 (defroutes json-routes
-  (GET "/request-example" [] request-example)
+  (GET "/json-request" [] json-request-echo)
   (GET "/json/*" [] json-handler)
-  )
+)
