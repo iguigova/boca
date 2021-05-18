@@ -2,33 +2,31 @@ div, span {
     padding: 4px;
 }
 
-divX:nth-child(even){
-    background-color: #f2f2f2;
+.commenter-textarea {
+    width: 100%;
+    padding: 4px;
 }
 
-.username{
-    font: 15px Sofia;
+.commenter-submit{
+    float: right;
+}
+
+.comment:hover {
+    background-color: #F5F5DC;
 }
 
 .comment-date{
     font: 10px Courier New;
+    float: right;
 }
 
-.comment:hover {
-    background-color: #ddd;
+.user-name{
+    font: 15px Sofia;
 }
 
-/*
 .modal {
-    position: fixed;
-    z-index: 1;
-    background-color: rgba(0, 0, 0, 0.25);
-}
-*/
-
-.modal-content {
     background-color: white;
-    position: absolute; 
+    position: absolute;
     border-radius: 5px;
     border: 2px solid black;
 }

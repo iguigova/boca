@@ -1,6 +1,5 @@
 import { User } from '/dist/user.js'
 import { Modal } from '/dist/modal.js'
-import { Crumb } from '/dist/crumb.js'
 
 function formatDate(date) {
     return date.toLocaleTimeString(); //toLocaleString();
@@ -14,16 +13,12 @@ function Comment({author, timestamp, text}) {
     }
     
     return (
-      <span className="comment">  
-            <Crumb className="comment-text" onMouseOver={togglePopped} content={text}/>
-            {popped ? <Modal content={
-                <span>
-                    <User user={author} />
-                    <Crumb className="comment-date" content={formatDate(timestamp)} />
-                </span>
-             } onClose={togglePopped} />
+      <div className="comment">  
+            <span className="comment-text" onClick={togglePopped}>{text}</span>
+            <span className="comment-date">{formatDate(timestamp)}</span>
+            {popped ? <Modal content={ <User user={author} /> } onClose={togglePopped} />
            : null}
-      </span>
+      </div>
     );
 }
 

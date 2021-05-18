@@ -2,12 +2,12 @@ import { Avatar } from '/dist/avatar.js';
 
 function User(props) {
   return (
-    <span className="user">
+    <div>
       <Avatar user={props.user} />
-      <span className="username">
+      <span className="user-name">
         {props.user.name}
       </span>
-    </span>
+    </div>
   );
 }
 

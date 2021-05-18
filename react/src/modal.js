@@ -2,12 +2,10 @@
 
 function Modal({content, onClose}) {
     return (
-      <div className="modal">
         <div className="modal-content">
             <span className="modal-close" onClick={onClose}>&times;</span>
             {content}
         </div>
-      </div>
     );
 }
 

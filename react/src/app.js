@@ -12,15 +12,10 @@ function App(props){
     }
     
     return (
-      <div>
-        <div>
-          <Comments comments={comments}/>
-        </div>
-        <div>
-          <Commenter comment={comment} onChange={handleChange} onSubmit={handleSubmit}/>
-        </div>
-      </div>            
-      );
+      <div className="app">
+        <Comments comments={comments}/>
+        <Commenter comment={comment} onChange={handleChange} onSubmit={handleSubmit}/>
+      </div>);
 }
 
 export { App }
