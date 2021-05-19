@@ -1,5 +1,17 @@
+* {
+  box-sizing: border-box; /*https://www.w3schools.com/css/css3_box-sizing.asp */
+}
+
+html, body, #root, .app{
+    height: 100%;
+    overflow: hidden;
+}
+
 div, span {
     padding: 4px;
+}
+
+.commenter{
 }
 
 .commenter-textarea {
@@ -9,10 +21,17 @@ div, span {
 
 .commenter-submit{
     float: right;
+    cursor: pointer;
+}
+
+.comments{
+    height: 80%;
+    overflow: auto;
 }
 
 .comment:hover {
     background-color: #F5F5DC;
+    cursor: pointer;
 }
 
 .comment-date{
