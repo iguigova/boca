@@ -11,9 +11,6 @@ div, span {
     padding: 4px;
 }
 
-.commenter{
-}
-
 .commenter-textarea {
     width: 100%;
     padding: 4px;
@@ -44,10 +41,10 @@ div, span {
 }
 
 .modal {
-    background-color: white;
-    position: absolute;
-    border-radius: 5px;
-    border: 2px solid black;
+    /* background-color: white; */
+    /* position: absolute; */
+    /* border-radius: 5px; */
+    /* border: 1px solid gray; */
 }
 
 .modal-close {
