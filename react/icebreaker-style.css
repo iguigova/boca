@@ -1,5 +1,6 @@
 * {
-  box-sizing: border-box; /*https://www.w3schools.com/css/css3_box-sizing.asp */
+    box-sizing: border-box; /*https://www.w3schools.com/css/css3_box-sizing.asp */
+    font-family: monospace;
 }
 
 html, body, #root, .app{
@@ -14,11 +15,29 @@ div, span {
 .commenter-textarea {
     width: 100%;
     padding: 4px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+}
+
+.commenter-textarea:focus{
+    outline: none;
+    background-color: floralwhite;
 }
 
 .commenter-submit{
     float: right;
     cursor: pointer;
+
+/* https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms
+    padding      : 5px;
+    font         : bold .6em sans-serif;
+    border       : 2px solid #333;
+    border-radius: 5px;
+    background   : none;
+    cursor       : pointer;
+    transform    : rotate(-1.5deg); 
+*/
 }
 
 .comments{
@@ -26,18 +45,24 @@ div, span {
     overflow: auto;
 }
 
-.comment:hover {
-    background-color: #F5F5DC;
-    cursor: pointer;
+.comment{
 }
 
-.comment-date{
-    font: 10px Courier New;
+.comment:hover {
+    background-color: lavender;
+}
+
+.comment-text{
+    display: inline-block;
+}
+
+.comment-avatar{
     float: right;
 }
 
-.user-name{
-    font: 15px Sofia;
+.comment-date{
+    font-size: smaller;
+    float: right;
 }
 
 .modal {

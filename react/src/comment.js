@@ -1,5 +1,7 @@
-import { User } from '/dist/user.js'
-import { Modal } from '/dist/modal.js'
+//import { User } from '/dist/user.js'
+//import { Modal } from '/dist/modal.js'
+
+import { Avatar } from '/dist/avatar.js'
 
 function formatDate(date) {
     return date.toLocaleTimeString(); //toLocaleString();
@@ -23,15 +25,23 @@ function Comment({uuid, author, timestamp, text}) {
         var linked = text.replaceAll(/(?:(?:(?:ftp|http)[s]*:\/\/|www\.)[^\.]+\.[^ \n]+)/gi, '<a target=_blank href="$&">$&</a>');
         return {__html: DOMPurify.sanitize(linked)};
     }
-    
+
     return (
-      <div id={uuid} className="comment" onClick={togglePopped}>  
-            <span className="comment-text" dangerouslySetInnerHTML={markup(text)}></span>
+      <div id={uuid} className="comment">              
+            
+            
+            <span className="comment-avatar"><Avatar user={author}/></span>
             <span className="comment-date">{formatDate(timestamp)}</span>
-            {popped ? <Modal content={ <User user={author} /> } onClose={togglePopped} />
-           : null}
-      </div>
-    );
+            <span className="comment-text" dangerouslySetInnerHTML={markup(text)}></span>
+      </div>);
+    
+    // return (
+    //   <div id={uuid} className="comment" onClick={togglePopped}>  
+    //         <span className="comment-text" dangerouslySetInnerHTML={markup(text)}></span>
+    //         <span className="comment-date">{formatDate(timestamp)}</span>
+    //         {popped ? <Modal content={ <User user={author} /> } onClose={togglePopped} />
+    //        : null}
+    //   </div>);
 }
 
 export { Comment }

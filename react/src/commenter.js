@@ -13,7 +13,8 @@ function Commenter({comment, onChange, onSubmit}){
     }
 
     return <div className="commenter">
-        <textarea 
+        <textarea
+          autoFocus
           className="commenter-textarea"
           placeholder="Enter comment here..." 
           value={comment || ""} // https://stackoverflow.com/questions/47012169/a-component-is-changing-an-uncontrolled-input-of-type-text-to-be-controlled-erro
