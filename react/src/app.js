@@ -6,7 +6,7 @@ function App(props){
     const [comment, setComment] = React.useState();
 
     function handleChange(event){ setComment(event.target.value); }
-    function handleSubmit(){        
+    function handleSubmit(event){
         addComment(comments.concat({uuid: props.uuid(), timestamp: new Date(), text: comment, author: props.user()}));
         setComment('');      
     }

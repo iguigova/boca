@@ -21,7 +21,8 @@ function Commenter({comment, onChange, onSubmit}){
           onChange={onChange}
           onKeyPress={(e) => onEnter(e, onSubmit)} // https://www.geeksforgeeks.org/how-to-use-onkeypress-event-in-reactjs/
         />
-      <button className="commenter-submit" type="button" onClick={onSubmit}>Submit</button>
+        <button className="commenter-submit" type="button" onClick={onSubmit}>Submit</button>
+        <button className="commenter-pix" type="button" onClick={onSubmit}>Pix</button>
     </div>;
 }
 
