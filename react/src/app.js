@@ -7,8 +7,10 @@ function App(props){
 
     function handleChange(event){ setComment(event.target.value); }
     function handleSubmit(event){
-        addComment(comments.concat({uuid: props.uuid(), timestamp: new Date(), text: comment, author: props.user()}));
-        setComment('');      
+        if (comment){
+            addComment(comments.concat({uuid: props.uuid(), timestamp: new Date(), text: comment, author: props.user()}));
+            setComment('');
+        }
     }
     
     return (
