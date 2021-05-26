@@ -25,6 +25,8 @@ function Comment({comment}) {
 
         //var linked = text.replaceAll(/(?:(?:(?:ftp|http)[s]*:\/\/|www\.)[^\.]+\.[^ \n]+)/gi, markup);
 
+        alert(text);
+        
         return {__html: DOMPurify.sanitize(text).replaceAll(/(?:(?:(?:ftp|http)[s]*:\/\/|www\.)[^\.]+\.[^ \n]+)/gi, markup)};
     }
 

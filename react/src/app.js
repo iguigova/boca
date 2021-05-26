@@ -12,11 +12,12 @@ function App(props){
             setComment('');
         }
     }
-    
+
+    // https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-shouldcomponentupdate
     return (
       <div className="app">
-        <Comments comments={comments}/>
-        <Commenter comment={comment} onChange={handleChange} onSubmit={handleSubmit}/>
+            {React.useMemo(() => <Comments comments={comments}/>, [comments])}
+            <Commenter comment={comment} onChange={handleChange} onSubmit={handleSubmit}/>
       </div>);
 }
 
