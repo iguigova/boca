@@ -10,7 +10,8 @@ function formatDate(date) {
 function Comment({comment}) {
     const [popped, setPopped] = React.useState(false);
 
-    React.useEffect(() => { document.getElementById(comment.uuid).scrollIntoView(); });
+    const lastComment = React.useRef(null);
+    React.useEffect(() => { lastComment.current.scrollIntoView(); });
     
     function togglePopped(){
         setPopped(!popped);
@@ -23,9 +24,9 @@ function Comment({comment}) {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll
         // https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml
 
-        //var linked = text.replaceAll(/(?:(?:(?:ftp|http)[s]*:\/\/|www\.)[^\.]+\.[^ \n]+)/gi, markup);
+        // var linked = text.replaceAll(/(?:(?:(?:ftp|http)[s]*:\/\/|www\.)[^\.]+\.[^ \n]+)/gi, markup);
 
-        alert(text);
+        // alert(text);
         
         return {__html: DOMPurify.sanitize(text).replaceAll(/(?:(?:(?:ftp|http)[s]*:\/\/|www\.)[^\.]+\.[^ \n]+)/gi, markup)};
     }
@@ -42,7 +43,7 @@ function Comment({comment}) {
     }
     
     return (
-      <div id={comment.uuid} className="comment">                                      
+      <div  ref={lastComment} className="comment">                                      
             <span className="comment-avatar"><Avatar user={comment.author}/></span>
             <span className="comment-date">{formatDate(comment.timestamp)}</span>
             <span className="comment-text" dangerouslySetInnerHTML={markup(comment.text, '<a target=_blank href="$&">$&</a>')}></span>
@@ -58,4 +59,9 @@ function Comment({comment}) {
     //   </div>);
 }
 
-export { Comment }
+// https://dev.to/dinhhuyams/introduction-to-react-memo-usememo-and-usecallback-5ei3
+// https://stackoverflow.com/questions/60821504/prevent-rerender-react-array-of-objects
+// this has to be outside of Comments... ?? but it works this way
+const CommentMemo = React.memo(({comment}) => { return <Comment comment={comment}/>;});
+
+export { CommentMemo, Comment }
