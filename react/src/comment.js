@@ -22,9 +22,8 @@ function Comment({comment}) {
     });
     
     function togglePopped(event){
-        //console.log(event.target.getAttribute('data-index'));
-        
-        setPopped(event ? event.target.getAttribute('data-index') : -1);
+        var di = event.target.getAttribute('data-index');
+        setPopped(di ? parseInt(di) : -1);
     }
        
     var sanitized = DOMPurify.sanitize(comment.text);
