@@ -50,7 +50,7 @@ function Comment({comment}) {
             <span className="comment-avatar"><Avatar user={comment.author}/></span>
             <span className="comment-date">{formatDate(comment.timestamp)}</span>
             <span className="comment-text" dangerouslySetInnerHTML={text_html}></span>
-            <span className="comment-pix" dangerouslySetInnerHTML={pix_html}></span>
+            <div><span className="comment-pix" dangerouslySetInnerHTML={pix_html}></span></div>
             { popped > -1 ? <Lightbox urls={pixurls} index={popped} onClose={togglePopped}/> : null }
       </div>);
 }
