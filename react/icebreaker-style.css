@@ -32,16 +32,6 @@ img {
 .commenter-submit, .commenter-pix{
     /* float: right; */
     cursor: pointer;
-
-/* https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms
-    padding      : 5px;
-    font         : bold .6em sans-serif;
-    border       : 2px solid #333;
-    border-radius: 5px;
-    background   : none;
-    cursor       : pointer;
-    transform    : rotate(-1.5deg); 
-*/
 }
 
 .comments{
@@ -66,7 +56,7 @@ img {
     width: 200px;
     height: 200px;
     object-fit: cover;
-    display: inline-block;
+    display: block;
     margin: 10px;    
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -83,23 +73,6 @@ img {
 .comment-date{
     font-size: smaller;
     float: right;
-}
-
-.modal {
-    /* background-color: white; */
-    /* position: absolute; */
-    /* border-radius: 5px; */
-    /* border: 1px solid gray; */
-}
-
-.modal-close {
-    color: black;
-    float: right;
-}
-
-.modal-close:hover {
-    color: red;
-    cursor: pointer;
 }
 
 .lightbox{
@@ -142,19 +115,24 @@ img {
     cursor:pointer;
     white-space:nowrap    
 }
-
-.lightbox-left{position:absolute;top:45%;left:0%;transform:translate(0%,-45%);-ms-transform:translate(-0%,-45%)}
-.lightbox-right{position:absolute;top:45%;right:0%;transform:translate(0%,-45%);-ms-transform:translate(0%,-45%)}
+.lightbox-left{position:absolute;top:50%;left:0%;transform:translate(0%,-50%);-ms-transform:translate(-0%,-50%)}
+.lightbox-right{position:absolute;top:50%;right:0%;transform:translate(0%,-50%);-ms-transform:translate(0%,-50%)}
 
 .lightbox-pic{
-    width: 98%;
-    margin: 10px;
-    padding-top:5px;
+    display: block;
+    max-width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
 }
+
+.lightbox-index{
+    text-align: center;
+}
+
 .lightbox-index-pic{
     width: 75px;
     height: 75px;
     object-fit: cover;
-    display: inline-block;
-    margin: 10px;
+    margin: 5px;
 }

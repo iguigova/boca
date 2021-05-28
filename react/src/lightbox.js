@@ -1,7 +1,7 @@
 // https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_modal_lightbox
 
-function Lightbox({urls, onClose}){
-    const [current, setCurrent] = React.useState(0);
+function Lightbox({urls, index, onClose}){
+    const [current, setCurrent] = React.useState(index);
     
     var pix = urls ? urls.map((url) => {return <img key={url} className="lightbox-pic" src={url} alt={url} />}) : null;
     var index = urls ? urls.map((url) => { return <img key={url} className="lightbox-index-pic" src={url}/>}) : null;

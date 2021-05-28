@@ -6,7 +6,7 @@ function formatDate(date) {
 }
 
 function Comment({comment}) {
-    const [popped, setPopped] = React.useState(false);
+    const [popped, setPopped] = React.useState(-1);
 
     const lastComment = React.useRef(null);
     React.useEffect(() => { lastComment.current.scrollIntoView(); });
@@ -14,14 +14,17 @@ function Comment({comment}) {
     React.useEffect(() => // https://stackoverflow.com/questions/53244493/react-setting-onclick-in-html-via-dangerouslysetinnerhtml
     {
         // document.getElementsByClassName('comment-pic').forEach(el => // https://stackoverflow.com/questions/15843581/how-to-correctly-iterate-through-getelementsbyclassname
-        document.querySelectorAll('.comment-pic').forEach(el =>
+        document.querySelectorAll('.comment-pic').forEach((el, index) =>
         {
             el.addEventListener('click', togglePopped);
+            el.setAttribute('data-index', index);
         });
     });
     
-    function togglePopped(){
-        setPopped(!popped);
+    function togglePopped(event){
+        //console.log(event.target.getAttribute('data-index'));
+        
+        setPopped(event ? event.target.getAttribute('data-index') : -1);
     }
        
     var sanitized = DOMPurify.sanitize(comment.text);
@@ -49,7 +52,7 @@ function Comment({comment}) {
             <span className="comment-date">{formatDate(comment.timestamp)}</span>
             <span className="comment-text" dangerouslySetInnerHTML={text_html}></span>
             <span className="comment-pix" dangerouslySetInnerHTML={pix_html}></span>
-            { popped ? <Lightbox urls={pixurls} onClose={togglePopped}/> : null }
+            { popped > -1 ? <Lightbox urls={pixurls} index={popped} onClose={togglePopped}/> : null }
       </div>);
 }
 
