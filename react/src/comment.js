@@ -14,7 +14,7 @@ function Comment({comment}) {
     React.useEffect(() => // https://stackoverflow.com/questions/53244493/react-setting-onclick-in-html-via-dangerouslysetinnerhtml
     {
         // document.getElementsByClassName('comment-pic').forEach(el => // https://stackoverflow.com/questions/15843581/how-to-correctly-iterate-through-getelementsbyclassname
-        document.querySelectorAll('.comment-pic').forEach((el, index) =>
+        lastComment.current.querySelectorAll('.comment-pic').forEach((el, index) =>
         {
             el.addEventListener('click', togglePopped);
             el.setAttribute('data-index', index);
