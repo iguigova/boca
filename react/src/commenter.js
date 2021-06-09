@@ -1,8 +1,11 @@
+import { uploadPic } from '/dist/utils.js';
+
 // https://dmitripavlutin.com/controlled-inputs-using-react-hooks/
 // https://www.robinwieruch.de/react-add-item-to-list
 
 function Commenter({comment, onChange, onSubmit}){
-
+    const textarea = React.useRef(null);
+    
     //https://reactjs.org/docs/events.html
     //https://reactjs.org/docs/handling-events.html
     function onEnter(e, handler) {
@@ -12,22 +15,35 @@ function Commenter({comment, onChange, onSubmit}){
         }
     }
 
-    function uploadPix(e){
-        const f = e.target.files[0];
-                
-        console.log(f);
+    function getValueSetter(element) {
+        const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
+        const prototype = Object.getPrototypeOf(element);
+        const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
 
-        const furl = 'https://la.storage.bunnycdn.com//boca-uswest/images/' + f.name;        
-        const options = {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/octet-stream', 'AccessKey': '77626b12-96e4-48ba-94738382ddd7-797e-4702'},
-            body: f
-        };
+        return (valueSetter && valueSetter !== prototypeValueSetter) ? prototypeValueSetter : valueSetter;
+    }
 
-        fetch(furl, options)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));        
+    function setValueSetterValue(element, value){
+        getValueSetter(element).call(element, value);
+    }
+
+    function appendValue(element, value){
+        setValueSetterValue(element, element.value + value);
+        element.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    function uploadPix(files){
+        for (const f of files){
+            
+            const url = uploadPic(f); // TODO: Do some checking on the file - type, size, etc.
+            appendValue(textarea.current, ' ' + encodeURI(url) + ' ');
+        }
+    }
+    
+    function loadPix(e){
+        uploadPix(e.target.files);
+        e.target.value = null;
+        textarea.current.focus();
     }
     
     return <div className="commenter">
@@ -35,14 +51,14 @@ function Commenter({comment, onChange, onSubmit}){
           autoFocus
           className="commenter-textarea"
           placeholder="Enter comment here..." 
+          ref={textarea}
           value={comment || ""} // https://stackoverflow.com/questions/47012169/a-component-is-changing-an-uncontrolled-input-of-type-text-to-be-controlled-erro
           onChange={onChange}
           onKeyPress={(e) => onEnter(e, onSubmit)} // https://www.geeksforgeeks.org/how-to-use-onkeypress-event-in-reactjs/
         />
         <button className="commenter-submit" type="button" onClick={onSubmit}>Submit</button>
-        <button className="commenter-pix1" type="button" onClick={onSubmit}>Pix</button>
         <label className="commenter-pix" htmlFor="commenter-pix-chooser">Pix</label>
-        <input className="commenter-pix-chooser" type="file" id="commenter-pix-chooser" name="commenter-pix-chooser" accept=".jpg, .jpeg, .png" multiple onChange={uploadPix}/>
+        <input className="commenter-pix-chooser" type="file" id="commenter-pix-chooser" name="commenter-pix-chooser" accept=".jpg, .jpeg, .png" multiple onChange={loadPix}/>
     </div>;
 }
 
