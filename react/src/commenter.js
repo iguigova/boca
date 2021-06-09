@@ -12,6 +12,24 @@ function Commenter({comment, onChange, onSubmit}){
         }
     }
 
+    function uploadPix(e){
+        const f = e.target.files[0];
+                
+        console.log(f);
+
+        const furl = 'https://la.storage.bunnycdn.com//boca-uswest/images/' + f.name;        
+        const options = {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/octet-stream', 'AccessKey': '77626b12-96e4-48ba-94738382ddd7-797e-4702'},
+            body: f
+        };
+
+        fetch(furl, options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));        
+    }
+    
     return <div className="commenter">
         <textarea
           autoFocus
@@ -22,7 +40,9 @@ function Commenter({comment, onChange, onSubmit}){
           onKeyPress={(e) => onEnter(e, onSubmit)} // https://www.geeksforgeeks.org/how-to-use-onkeypress-event-in-reactjs/
         />
         <button className="commenter-submit" type="button" onClick={onSubmit}>Submit</button>
-        <button className="commenter-pix" type="button" onClick={onSubmit}>Pix</button>
+        <button className="commenter-pix1" type="button" onClick={onSubmit}>Pix</button>
+        <label className="commenter-pix" htmlFor="commenter-pix-chooser">Pix</label>
+        <input className="commenter-pix-chooser" type="file" id="commenter-pix-chooser" name="commenter-pix-chooser" accept=".jpg, .jpeg, .png" multiple onChange={uploadPix}/>
     </div>;
 }
 
