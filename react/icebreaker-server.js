@@ -6,7 +6,7 @@ var fs = require('fs')
 var path = require('path')
 var baseDirectory = __dirname   // or whatever base directory you want
 
-var port = 9615
+var port = process.env.PORT || 3000
 
 var contentTypesByExtension = {
     '.html': "text/html",
