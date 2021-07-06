@@ -58,8 +58,15 @@ function Commenter({comment, onChange, onSubmit}){
         />
         <button className="commenter-submit" type="button" onClick={onSubmit}>Submit</button>
         <label className="commenter-pix" htmlFor="commenter-pix-chooser">Pix</label>
-        <input className="commenter-pix-chooser" type="file" id="commenter-pix-chooser" name="commenter-pix-chooser" accept=".jpg, .jpeg, .png" multiple onChange={loadPix}/>
+        <input className="commenter-pix-chooser" type="file" id="commenter-pix-chooser" name="commenter-pix-chooser" accept="image/*" multiple onChange={loadPix}/>               
     </div>;
 }
 
 export { Commenter }
+
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/capture
+// var el = document.createElement('input')
+// var supported = el.capture != undefined
+
+// console.log('capture supported: '+supported)
+//  <input type="file" accept="image/*" capture="camera"/>
