@@ -56,9 +56,10 @@ function Commenter({comment, onChange, onSubmit}){
           onChange={onChange}
           onKeyPress={(e) => onEnter(e, onSubmit)} // https://www.geeksforgeeks.org/how-to-use-onkeypress-event-in-reactjs/
         />
-        <button className="commenter-submit" type="button" onClick={onSubmit}>Submit</button>
-        <label className="commenter-pix" htmlFor="commenter-pix-chooser">Pix</label>
-        <input className="commenter-pix-chooser" type="file" id="commenter-pix-chooser" name="commenter-pix-chooser" accept="image/*" multiple onChange={loadPix}/>               
+        <label className="commenter-button" htmlFor="commenter-submit">Submit</label>
+        <button className="commenter-submit" id="commenter-submit" name="commenter-submit" type="button" onClick={onSubmit}>Submit</button>
+        <label className="commenter-button" htmlFor="commenter-pix-chooser">Pix</label>
+        <input className="commenter-pix-chooser" id="commenter-pix-chooser" name="commenter-pix-chooser" type="file" accept="image/*" multiple onChange={loadPix}/>               
     </div>;
 }
 

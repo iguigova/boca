@@ -5,8 +5,9 @@
     --xxl-padding: 1em;
 
     --border: 0.0625em;
-    
-    --xxl-font: 2em;
+
+    --font: 1em;
+    --xl-font: 2em;
     
     --xs-thumbnail: 4.625em;
     --thumbnail: 11em;
@@ -41,11 +42,15 @@ html, body, #root, .app{
 
 /* https://medium.com/cssjunction/how-to-stop-zoom-in-on-input-focus-on-mobile-devices-835edcaa2ba4 */
 input, select, textarea {
-    font-size: 16px;
+    font-size: var(--font);
+}
+
+input:focus, select:focus, textarea:focus {
+    font-size: var(--font);
 }
 
 /* https://www.w3schools.com/cssref/css_pxtoemconversion.asp */
-div, span {
+div, span, label {
     padding: var(--padding);
 }
 
@@ -66,12 +71,10 @@ img {
     background-color: floralwhite;
 }
 
-.commenter-submit, .commenter-pix{
+.commenter-button{
     /* float: right; */
     cursor: pointer;
-}
-
-.commenter-pix{
+    
     padding: var(--padding);
     border-width: var(--border);
     border-style: outset;
@@ -80,8 +83,9 @@ img {
     border-radius: var(--padding);
 }
 
-.commenter-pix-chooser{
-    opacity: 0; /* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file */
+.commenter-submit, .commenter-pix-chooser{
+    /* opacity: 0; /* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file */
+    display: none;
 }
 
 .comments{
@@ -122,7 +126,7 @@ img {
 }
 
 .comment-date{
-    font-size: smaller;
+    font-size: xx-small;
     float: right;
 }
 
@@ -149,7 +153,7 @@ img {
 }
 
 .lightbox-close{
-    font-size: var(--xxl-font);
+    font-size: var(--xl-font);
     float: right;
 }
 
