@@ -17,3 +17,7 @@ node_modules
 karma.conf.js
 src/gen-js
 /resources/public/index.production.html
+
+*.ws.sh
+lein.bat
+/resources/public/dist

@@ -4,5 +4,5 @@
 
 IG memory box
 
-. To start the server, ../icebreaker/server/app/lein.bat run
+. To start the server, "c:/Program Files/Lein/Lein.bat" run
 . To stop the server, tcpview.exe 
