@@ -21,3 +21,4 @@ src/gen-js
 *.ws.sh
 lein.bat
 /resources/public/dist
+/resources/public/package-lock.json
