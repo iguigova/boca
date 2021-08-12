@@ -9,8 +9,7 @@ function App(props){
     function handleChange(event){ setComment(event.target.value); }
     function handleSubmit(event){
         if (comment){
-            var telegram = {uuid: props.uuid(), timestamp: new Date().toLocaleTimeString(), text: comment, author: props.user()};
-            //addComment(comments.concat(telegram));            
+            var telegram = {uuid: props.uuid(), timestamp: new Date().toLocaleTimeString(), text: comment, author: props.user()};         
             telegraph(telegram, (msg) => { addComment(comments.concat(JSON.parse(msg))); });
             setComment('');
         }

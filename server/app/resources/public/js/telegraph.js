@@ -1,13 +1,14 @@
 var websocket;
 
-var createSocket = () => {
+var createSocket = (timeout) => {
     websocket = new WebSocket(((window.location.protocol === "https:") ? "wss://" : "ws://") + window.location.host + "/ws");
     websocket.onopen = onOpen;
     websocket.onclose = onClose;
     websocket.onmessage = onMessage;
     websocket.onerror = onError;
 
-    return websocket;
+    //return websocket;
+    return new Promise(resolve => { setTimeout(function() { resolve(websocket) }, timeout || 1000); }); 
 };
 
 var onOpen = (e) => {
@@ -34,9 +35,9 @@ var log = (msg) => {
     console.log(msg);
 };
 
-var telegraph = (msg, process) => {
+var telegraph = async (msg, process) => {
     log = process || log;   
-    (websocket || createSocket()).send(JSON.stringify(msg));
+    (websocket || await createSocket()).send(JSON.stringify(msg));
 };
 
 export { telegraph }
