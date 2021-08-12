@@ -1,12 +1,17 @@
+// https://stackoverflow.com/questions/10406930/how-to-construct-a-websocket-uri-relative-to-the-page-uri 
+// var s = new WebSocket(((window.location.protocol === "https:") ? "wss://" : "ws://") + window.location.host + "/ws");
 
-var WS_URI = "ws://localhost:3000/ws";
+// var WS_URI = "ws://localhost:3000/ws";
 var output, websocket;
 
 var init = () => {
 
     output = document.getElementById("output");
 
-    websocket = new WebSocket(WS_URI);
+    console.log(window.location.host);
+    console.log(((window.location.protocol === "https:") ? "wss://" : "ws://") + window.location.host + "/ws");
+
+    websocket = new WebSocket(((window.location.protocol === "https:") ? "wss://" : "ws://") + window.location.host + "/ws");
     websocket.onopen = onOpen;
     websocket.onclose = onClose;
     websocket.onmessage = onMessage;
@@ -30,6 +35,7 @@ var onMessage = (e) => {
 
 var onError = (e) => {
     writeToScreen('<span style="color: red;">ERROR:</span> ' + e.data);
+    console.log(e);
 };
 
 var send = (msg) => {

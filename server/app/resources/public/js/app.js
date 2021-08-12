@@ -1,5 +1,6 @@
 import { Comments } from '/dist/comments.js'
 import { Commenter } from '/dist/commenter.js'        
+import { telegraph } from '/dist/telegraph.js';
 
 function App(props){
     const [comments, addComment] = React.useState(props.comments);
@@ -8,7 +9,9 @@ function App(props){
     function handleChange(event){ setComment(event.target.value); }
     function handleSubmit(event){
         if (comment){
-            addComment(comments.concat({uuid: props.uuid(), timestamp: new Date(), text: comment, author: props.user()}));
+            var telegram = {uuid: props.uuid(), timestamp: new Date().toLocaleTimeString(), text: comment, author: props.user()};
+            //addComment(comments.concat(telegram));            
+            telegraph(telegram, (msg) => { addComment(comments.concat(JSON.parse(msg))); });
             setComment('');
         }
     }

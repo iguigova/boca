@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "description": "",
     "scripts": {
+        "server": "",
         "babel": "npx babel --watch js --out-dir dist --presets=@babel/preset-react"
     },
     "keywords": [],

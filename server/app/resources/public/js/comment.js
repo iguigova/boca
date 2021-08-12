@@ -1,10 +1,6 @@
 import { Lightbox } from '/dist/lightbox.js'
 import { Avatar } from '/dist/avatar.js'
 
-function formatDate(date) {
-    return date.toLocaleTimeString(); //toLocaleString();
-}
-
 function Comment({comment}) {
     const [popped, setPopped] = React.useState(-1);
 
@@ -47,8 +43,8 @@ function Comment({comment}) {
        
     return (
       <div  ref={lastComment} className="comment">                                      
-            <span className="comment-avatar"><Avatar user={comment.author}/></span>
-            <span className="comment-date">{formatDate(comment.timestamp)}</span>
+            <span className="comment-avatar"><Avatar user={ comment.author }/></span>
+            <span className="comment-date">{ comment.timestamp }</span>
             <span className="comment-text" dangerouslySetInnerHTML={text_html}></span>
             <div><span className="comment-pix" dangerouslySetInnerHTML={pix_html}></span></div>
             { popped > -1 ? <Lightbox urls={pixurls} index={popped} onClose={togglePopped}/> : null }

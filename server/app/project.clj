@@ -7,6 +7,7 @@
                  [ring-server "0.5.0"]
                  [http-kit "2.5.3"]
                  [org.clojure/data.json "0.2.6"]
+                 [javax.xml.bind/jaxb-api "2.4.0-b180830.0359"] ;;https://www.deps.co/blog/how-to-upgrade-clojure-projects-to-use-java-11/
                  ]
   ;; :plugins [[lein-ring "0.12.5"]]
   ;; :ring {:handler icebreaker.handler/app
