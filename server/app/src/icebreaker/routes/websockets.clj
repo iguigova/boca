@@ -13,7 +13,9 @@
   (println "channel closed:" status)
   (swap! channels #(remove #{channel} %))) ;; swap! channels disj channel
 
-(defn notify-clients [msg]
+(defn notify-clients [request msg]
+  ;; (println request)
+  (println (:pathname (:params request)))
   (doseq [channel @channels]
     (srvr/send! channel msg)))
 
@@ -21,7 +23,7 @@
   (srvr/with-channel request channel
     (connect! channel)
     (srvr/on-close channel (partial disconnect! channel))
-    (srvr/on-receive channel #(notify-clients %))))
+    (srvr/on-receive channel #(notify-clients request %))))
 
 (defroutes websocket-routes
   (GET "/ws" request (ws-handler request)))

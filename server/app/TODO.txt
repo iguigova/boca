@@ -5,4 +5,38 @@
 IG memory box
 
 . To start the server, "c:/Program Files/Lein/Lein.bat" run
-. To stop the server, tcpview.exe 
+. To stop the server, tcpview.exe
+
+. To run in the repl,  (run-server (reload/wrap-reload #'app) {:port 3030})
+
+
+-------------
+. open project.clj
+. Mx cider-jack-in (to start the repl) (https://github.com/clojure-emacs/cider)
+
+-------------
+cd d:/Sandbox/icebreaker/server/app
+lein.bat run
+
+
+
+-----------------------------
+Deploying to AWS
+. go to server/bin folder
+. zip the contents to a zip file - upload it
+
+APP LOAD BALANCER
+(.ebextensions has config info about the environment): https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-alb.html
+
+PORT
+. SERVER PORT environment variable https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/
+it defaults to 5000 and icebreaker uses 3000
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-softwaresettings.html -- how to set env variables in config file
+https://stackoverflow.com/questions/29423608/accessing-environment-variables-in-aws-beanstalk-ebextensions
+
+ROUTING
+https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-beanstalk-environment.html
+
+-----------------------------
+to run a sh script, at the prompt type
+bash <name of file>.sh
