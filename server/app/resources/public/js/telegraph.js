@@ -13,17 +13,18 @@ var createSocket = (timeout) => {
 
 var onOpen = (e) => {
     console.log("CONNECTED");
-    //console.log(e);
+    console.log(e);
 };
 
 var onClose = (e) => {
     console.log("DISCONNECTED");
-    //console.log(e);
+    console.log(e);
     websocket = null;
 };
 
 var onMessage = (e) => {
-    //console.log(e);
+    console.log("Message received: ");
+    console.log(e);
     log(e.data);
 };
 
@@ -36,6 +37,8 @@ var log = (msg) => {
 };
 
 var telegraph = async (msg, process) => {
+    console.log("Message queued: ");
+    console.log(msg);
     log = process || log;   
     (websocket || await createSocket()).send(JSON.stringify(msg));
 };

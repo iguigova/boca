@@ -10,7 +10,10 @@ function App(props){
     function handleSubmit(event){
         if (comment){
             var telegram = {uuid: props.uuid(), timestamp: new Date().toLocaleTimeString(), text: comment, author: props.user()};         
-            telegraph(telegram, (msg) => { addComment(comments.concat(JSON.parse(msg))); });
+            telegraph(telegram, (msg) =>
+            {
+                addComment(c => c.concat(JSON.parse(msg))); // https://www.freecodecamp.org/news/learn-react-usestate-hook-in-10-minutes/
+            });
             setComment('');
         }
     }

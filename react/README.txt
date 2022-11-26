@@ -3,4 +3,4 @@
 (2) node icebreaker-server.js
 
 ---
-test hosted at https://1.bocado.news
+test hosted at https://<subdomainname>.bocado.news

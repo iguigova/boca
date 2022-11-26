@@ -1,7 +1,6 @@
 - call the server from react
 
 
-
 IG memory box
 
 . To start the server, "c:/Program Files/Lein/Lein.bat" run
@@ -14,11 +13,23 @@ IG memory box
 . open project.clj
 . Mx cider-jack-in (to start the repl) (https://github.com/clojure-emacs/cider)
 
+comile the buffer CcCk (https://docs.cider.mx/cider/usage/cider_mode.html)
+switch to repl (mind the namespace): https://docs.cider.mx/cider/repl/basic_usage.html
+
 -------------
 cd d:/Sandbox/icebreaker/server/app
 lein.bat run
 
+-----------------------------
 
+To compile the react files
+npx babel --watch src --out-dir dist --presets=@babel/preset-react
+
+To reload the js files
+https://superuser.com/questions/1107269/how-to-make-chrome-reload-all-js-and-css-file-of-a-page
+
+where are the resource files anyways:
+https://stackoverflow.com/questions/57367826/serve-static-resources-using-clojures-ring
 
 -----------------------------
 Deploying to AWS
@@ -40,3 +51,6 @@ https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-beanstalk-e
 -----------------------------
 to run a sh script, at the prompt type
 bash <name of file>.sh
+
+to run an exe in bash shell
+./<nameofexe>

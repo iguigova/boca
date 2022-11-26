@@ -16,10 +16,10 @@
   (:gen-class))
 
 (defn init []
-  (println "icebreaker is starting"))
+  (println "boca is starting"))
 
 (defn destroy []
-  (println "icebreaker is shutting down"))
+  (println "boca is shutting down"))
 
 (defroutes app-routes
   (route/resources "/")
