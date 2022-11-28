@@ -6,6 +6,18 @@
 (defonce channels (atom {}))
 (defonce messages (atom {}))
 
+(defn store! [store pathname obj]
+  (if (contains? @store pathname)
+    (swap! store update pathname conj obj)
+    (swap! store assoc pathname #{obj}))  )
+
+(defn record! [pathname msg]
+  (store! messages pathname msg))
+
+(defn sync-messages [pathname channel]
+  (doseq [msg (pathname @messages)]
+    (srvr/send! channel msg)))
+
 (defn connect! [pathname channel]
   (println "channel open: " channel " at " pathname)
   (store! channels pathname channel)
@@ -14,18 +26,6 @@
 (defn disconnect! [pathname channel status]
   (println "channel closed:" status " at " pathname)
   (swap! channels #(remove #{channel} (pathname %)))) ;; swap! channels disj channel
-
-(defn record! [pathname msg]
-  (store! messages pathname msg))
-
-(defn store! [store pathname obj]
-  (if (contains? @store pathname)
-    (swap! store update pathname conj obj)
-    (swap! store assoc pathname #{obj}))  )
-
-(defn sync-messages [pathname channel]
-  (doseq [msg (pathname @messages)]
-    (srvr/send! channel msg)))
 
 (defn notify-channels [pathname msg]
   (record! pathname msg)
