@@ -25,7 +25,7 @@
 
 (defn disconnect! [pathname channel status]
   (println "channel closed:" status " at " pathname)
-  (swap! channels #(remove #{channel} (pathname %)))) ;; swap! channels disj channel
+  (swap! channels update-in [pathname] #(remove #{channel} %))) ;; swap! channels disj channel
 
 (defn notify-channels [pathname msg]
   (record! pathname msg)
