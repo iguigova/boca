@@ -25,22 +25,25 @@ var onClose = (e) => {
 var onMessage = (e) => {
     console.log("Message received: ");
     console.log(e);
-    log(e.data);
+    logTelegram(e.data);
 };
 
 var onError = (e) => {
     console.log(e);
 };
 
-var log = (msg) => {
-    console.log(msg);
+var logTelegram = (telegram) => {
+    console.log(telegram);
 };
 
-var telegraph = async (msg, process) => {
+var acceptTelegrams = (onTelegram) => {
+    logTelegram = onTelegram || logTelegram;
+}
+
+var telegraph = async (telegram) => {
     console.log("Message queued: ");
-    console.log(msg);
-    log = process || log;   
-    (websocket || await createSocket()).send(JSON.stringify(msg));
+    console.log(telegram);
+    (websocket || await createSocket()).send(JSON.stringify(telegram));
 };
 
-export { telegraph }
+export { telegraph, acceptTelegrams }
