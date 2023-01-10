@@ -36,7 +36,7 @@
 }
 
 html, body, #root, .app{
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -46,7 +46,7 @@ input, select, textarea {
 }
 
 input:focus, select:focus, textarea:focus {
-    font-size: var(--font);
+    font-size: 16px; /*https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone*/
 }
 
 /* https://www.w3schools.com/cssref/css_pxtoemconversion.asp */
@@ -89,7 +89,7 @@ img {
 }
 
 .comments{
-    height: 80%;
+    height: 90%;
     overflow: auto;
 }
 
