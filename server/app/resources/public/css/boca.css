@@ -6,7 +6,7 @@
 
     --border: 0.0625em;
 
-    --font: 1em;
+    --font: 16px;
     --xl-font: 2em;
     
     --xs-thumbnail: 4.625em;
@@ -46,7 +46,7 @@ input, select, textarea {
 }
 
 input:focus, select:focus, textarea:focus {
-    font-size: 16px; /*https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone*/
+    font-size: var(--font); /*https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone*/
 }
 
 /* https://www.w3schools.com/cssref/css_pxtoemconversion.asp */
