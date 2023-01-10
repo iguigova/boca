@@ -1,6 +1,6 @@
-(defproject icebreaker "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+(defproject boca "0.1.0-SNAPSHOT"
+  :description "Talk to me, whoever you are"
+  :url "https://bocado.news/boca"
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [compojure "1.6.1"]
                  [hiccup "1.0.5"]
@@ -10,13 +10,13 @@
                  [javax.xml.bind/jaxb-api "2.4.0-b180830.0359"] ;;https://www.deps.co/blog/how-to-upgrade-clojure-projects-to-use-java-11/
                  ]
   ;; :plugins [[lein-ring "0.12.5"]]
-  ;; :ring {:handler icebreaker.handler/app
-  ;;        :init icebreaker.handler/init
-  ;;        :destroy icebreaker.handler/destroy}
-  :main ^:skip-aot icebreaker.handler
+  ;; :ring {:handler boca.handler/app
+  ;;        :init boca.handler/init
+  ;;        :destroy boca.handler/destroy}
+  :main ^:skip-aot boca.handler
   :profiles
   {:uberjar {:aot :all
-             :uberjar-name "icebreaker.jar"}
+             :uberjar-name "boca.jar"}
    :production
    {:ring
     {:open-browser? false, :stacktraces? false, :auto-reload? false}}

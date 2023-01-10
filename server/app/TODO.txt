@@ -13,11 +13,11 @@ IG memory box
 . open project.clj
 . Mx cider-jack-in (to start the repl) (https://github.com/clojure-emacs/cider)
 
-comile the buffer CcCk (https://docs.cider.mx/cider/usage/cider_mode.html)
+compile the buffer CcCk (https://docs.cider.mx/cider/usage/cider_mode.html)
 switch to repl (mind the namespace): https://docs.cider.mx/cider/repl/basic_usage.html
 
 -------------
-cd d:/Sandbox/icebreaker/server/app
+cd d:/Sandbox/boca/server/app
 lein.bat run
 
 -----------------------------
@@ -41,7 +41,7 @@ APP LOAD BALANCER
 
 PORT
 . SERVER PORT environment variable https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/
-it defaults to 5000 and icebreaker uses 3000
+it defaults to 5000 and boca uses 3000
 https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-softwaresettings.html -- how to set env variables in config file
 https://stackoverflow.com/questions/29423608/accessing-environment-variables-in-aws-beanstalk-ebextensions
 

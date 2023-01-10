@@ -2,4 +2,4 @@
 
 lein clean
 lein uberjar
-cp target/icebreaker.jar ../bin/
+cp target/boca.jar ../bin/

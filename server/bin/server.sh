@@ -3,4 +3,4 @@
 export PRODUCTION="true"
 export PORT="3000"
 
-java -jar icebreaker.jar
+java -jar boca.jar
