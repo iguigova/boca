@@ -7,7 +7,7 @@
 
     "action": {
         //"default_popup": "popup-boca.html", 
-        "default_icon": "earth-icon.png"
+        "default_icon": "boca.png"  // https://publicdomainvectors.org/en/free-clipart/Emoji-silhouette/50478.html
     },
 
     "background": {
