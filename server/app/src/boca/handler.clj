@@ -11,8 +11,7 @@
             [boca.routes.boca :refer [boca-routes]]
             [boca.routes.json :refer [json-routes]]            
             [boca.routes.websockets :refer [websocket-routes]]
-            [boca.environment :as environment]
-            )
+            [boca.environment :as environment])
   (:gen-class))
 
 (defn init []
@@ -39,6 +38,6 @@
       (wrap-base-url)))
 
 (defn -main [& args]
-  (let [handler (if (:production E) app (reload/wrap-reload #'app))]    
+  (let [handler (if (:production E) app (reload/wrap-reload #'app))] ;; https://github.com/ring-clojure/ring/wiki/Reloading   
     (println "server started at port" (:port E))
     (run-server handler {:port (:port E)})))
