@@ -6,7 +6,7 @@
 
     --border: 0.0625em;
 
-    --font: 16px;
+    --font: 16px; /*https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone*/
     --xl-font: 2em;
     
     --xs-thumbnail: 4.625em;
@@ -45,10 +45,6 @@ input, select, textarea {
     font-size: var(--font);
 }
 
-input:focus, select:focus, textarea:focus {
-    font-size: var(--font); /*https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone*/
-}
-
 /* https://www.w3schools.com/cssref/css_pxtoemconversion.asp */
 div, span, label {
     padding: var(--padding);
@@ -66,21 +62,8 @@ img {
     box-shadow: var(--border) var(--border) var(--border) #999;
 }
 
-.commenter-textarea:focus{
+.commenter-textarea:focus {
     outline: none;
-    background-color: floralwhite;
-}
-
-.commenter-button{
-    /* float: right; */
-    cursor: pointer;
-    
-    padding: var(--padding);
-    border-width: var(--border);
-    border-style: outset;
-    border-color: #767676; 
-    background-color: #efefef;
-    border-radius: var(--padding);
 }
 
 .commenter-submit, .commenter-pix-chooser{
