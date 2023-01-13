@@ -61,7 +61,7 @@ function Commenter({comment, onChange, onSubmit}){
         <button className="commenter-submit" id="commenter-submit" name="commenter-submit" type="button" onClick={onSubmit}>Submit</button>
         <label className="fa-solid fa-images" htmlFor="commenter-pix-chooser"></label>
         <input className="commenter-pix-chooser" id="commenter-pix-chooser" name="commenter-pix-chooser" type="file" accept="image/*" multiple onChange={loadPix}/>
-        <ImgLink href="/about" src="./extension/boca.png" alt="boca logo"/>
+        <ImgLink href="/about" src="../images/boca.png" alt="boca logo"/>
     </div>;
 }
 
