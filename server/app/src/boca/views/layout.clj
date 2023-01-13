@@ -5,7 +5,8 @@
   (html5
     [:head
      [:title "Welcome to boca"]
-     (include-css "/css/screen.css")]
+     (include-css "/css/common.css")]
+     (include-css "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css")
     [:body body]))
 
 (defn boca []

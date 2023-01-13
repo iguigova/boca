@@ -50,8 +50,21 @@ div, span, label {
     padding: var(--padding);
 }
 
+label {
+    cursor: pointer;
+}
+
 img {
     border-radius: var(--padding);
+}
+
+.img-link{
+    float: right;
+    padding-right: 200px;
+}
+
+.link-img {
+    width: 20px;
 }
 
 .commenter-textarea {

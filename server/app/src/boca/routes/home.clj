@@ -5,18 +5,27 @@
 
 (defn home []
   (layout/common
-    [:div#main-container
-     [:h1 "Hello World!"]]))
+   [:div#right-container
+    [:a#about-link {:href "/about" :class "fa-solid fa-address-card"}]]
+   [:div#main-container
+    [:h1 "Hello World!"]]))
 
 (defn about []
   (layout/common
-    [:div#main-container
-     [:h1 [:i "You"] " talk, therefore I am."]
-     [:h1 "* * *"]
-     [:p "Take off your skin,"]
-     [:p "Dive into a spin -"]
-     [:p "Gold fish, 'Hello'!"]
-     [:p [:a {:href "http://urgh.weebly.com/"} "[IG]"] ", 2008"]]))
+   [:div#right-container
+    [:h4 "Boca Source Files: " [:a {:href "https://github.com/iguigova/boca"} "https://github.com/iguigova/boca"]]
+    ]
+   [:div#main-container
+    [:h1 [:i "You"] " talk, therefore I am."]
+    [:img#logo {:src "./extension/boca.png"}]
+    ]
+   [:div#right-container
+    [:p "Take off your skin,"]
+    [:p "Dive into a spin -"]
+    [:p "Gold fish, 'Hello'!"]
+    [:p [:a {:href "http://urgh.weebly.com/"} "[IG]"]]
+    
+    ]))
 
 (defroutes home-routes
   (GET "/" [] (home))

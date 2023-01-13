@@ -1,4 +1,5 @@
 import { uploadPic } from '/dist/utils.js';
+import { ImgLink } from '/dist/imglink.js';
 
 // https://dmitripavlutin.com/controlled-inputs-using-react-hooks/
 // https://www.robinwieruch.de/react-add-item-to-list
@@ -59,7 +60,8 @@ function Commenter({comment, onChange, onSubmit}){
         <label className="fa-solid fa-paper-plane" htmlFor="commenter-submit"></label>
         <button className="commenter-submit" id="commenter-submit" name="commenter-submit" type="button" onClick={onSubmit}>Submit</button>
         <label className="fa-solid fa-images" htmlFor="commenter-pix-chooser"></label>
-        <input className="commenter-pix-chooser" id="commenter-pix-chooser" name="commenter-pix-chooser" type="file" accept="image/*" multiple onChange={loadPix}/>  
+        <input className="commenter-pix-chooser" id="commenter-pix-chooser" name="commenter-pix-chooser" type="file" accept="image/*" multiple onChange={loadPix}/>
+        <ImgLink href="/about" src="../extension/boca.png" alt="boca logo"/>
     </div>;
 }
 
