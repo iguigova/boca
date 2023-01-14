@@ -3,7 +3,7 @@
     
     "name": "Boca",
     "description": "You talk, therefore I am",
-    "version": "1.0.1",
+    "version": "1.0.2",
 
     "icons": {
         "16": "boca16.png",
@@ -13,7 +13,7 @@
     },
 
     "action": { 
-        "default_icon": "boca.png"
+        "default_icon": "boca128.png"
     },
 
     "background": {
