@@ -2,12 +2,18 @@
     "manifest_version": 3,
     
     "name": "Boca",
-    "description": "Boca Extension - talk about it.",
-    "version": "1.0",
+    "description": "Boca extension - talk about it.",
+    "version": "1.0.1",
 
-    "action": {
-        //"default_popup": "popup-boca.html", 
-        "default_icon": "boca.png"  // https://publicdomainvectors.org/en/free-clipart/Emoji-silhouette/50478.html
+    "icons": {
+        "16": "boca16.png",
+        "32": "boca16.png",
+        "48": "boca48.png",
+        "128": "boca128.png"
+    },
+
+    "action": { 
+        "default_icon": "boca.png"
     },
 
     "background": {
@@ -17,20 +23,5 @@
     "permissions": [
         "tabs",
         "storage"
-    ]
-
-    // https://stackoverflow.com/questions/66618136/persistent-service-worker-in-chrome-extension/66618269#66618269
-
-    // "content_scripts":
-    // [
-    //     {
-    //         "matches": ["<all_urls>"],
-    //         "js": ["dist/boca.js",
-    //                "dist/react.production.min.js",
-    //                "dist/react-dom.production.min.js",
-    //                "dist/purify.min.js"
-    //               ],
-    //         "css": ["css/boca.css"]
-    //     }
-    // ]  
+    ] 
 }

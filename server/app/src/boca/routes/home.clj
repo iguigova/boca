@@ -17,7 +17,7 @@
     ]
    [:div#main-container
     [:h1 [:i "You"] " talk, therefore I am."]
-    [:img#logo {:src "./extension/boca.png"}]
+    [:img#logo {:src "images/boca.png"}]
     ]
    [:div#right-container
     [:p "Take off your skin,"]

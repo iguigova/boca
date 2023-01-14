@@ -14,7 +14,6 @@
   ;;        :init boca.handler/init
   ;;        :destroy boca.handler/destroy}
   :main ^:skip-aot boca.handler
-  ;; :resource-paths ["resources/images"]
   :profiles
   {:uberjar {:aot :all
              :uberjar-name "boca.jar"}
