@@ -20,7 +20,7 @@ function App(props){
     }
 
     React.useEffect(() => {
-        sendTelegram("Welcome " + props.user().name);
+        sendTelegram();//"Welcome " + props.user().name);
         
         acceptTelegrams((telegram) => {
             // https://www.freecodecamp.org/news/learn-react-usestate-hook-in-10-minutes/

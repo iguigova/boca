@@ -1,4 +1,5 @@
 **/bin/*.jar
 **/bin/*.zip
+**/extension/*.zip
 *~
 *#*

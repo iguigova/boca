@@ -50,17 +50,8 @@ div, span, label {
     padding: var(--padding);
 }
 
-label {
-    cursor: pointer;
-}
-
 img {
     border-radius: var(--padding);
-}
-
-.img-link{
-    float: right;
-    padding-right: 200px;
 }
 
 .link-img {
@@ -82,6 +73,13 @@ img {
 .commenter-submit, .commenter-pix-chooser{
     /* opacity: 0; /* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file */
     display: none;
+    float: right;
+}
+
+.commenter-label {
+    cursor: pointer;
+    float: right;
+    padding-right: 15px;
 }
 
 .comments{

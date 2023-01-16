@@ -57,9 +57,9 @@ function Commenter({comment, onChange, onSubmit}){
           onChange={onChange}
           onKeyPress={(e) => onEnter(e, onSubmit)} // https://www.geeksforgeeks.org/how-to-use-onkeypress-event-in-reactjs/
         />
-        <label className="fa-solid fa-paper-plane" htmlFor="commenter-submit"></label>
+        <label className="commenter-label fa-solid fa-paper-plane" htmlFor="commenter-submit"></label>
         <button className="commenter-submit" id="commenter-submit" name="commenter-submit" type="button" onClick={onSubmit}>Submit</button>
-        <label className="fa-solid fa-images" htmlFor="commenter-pix-chooser"></label>
+        <label className="commenter-label fa-solid fa-images" htmlFor="commenter-pix-chooser"></label>
         <input className="commenter-pix-chooser" id="commenter-pix-chooser" name="commenter-pix-chooser" type="file" accept="image/*" multiple onChange={loadPix}/>
         <ImgLink href="/about" src="/images/boca.png" alt="boca logo"/>
     </div>;
