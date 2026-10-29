@@ -1,5 +1,3 @@
-**/bin/*.jar
-**/bin/*.zip
-**/extension/*.zip
-*~
-*#*
+node_modules/
+dist/
+boca.zip

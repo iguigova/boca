@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boca</title>
+<link rel="stylesheet" href="brand.css">
+<link rel="stylesheet" href="panel.css">
+<script type="module" src="main.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Boca</h1>
+    <p class="tag" id="page"></p>
+  </header>
+  <p id="status" role="status" aria-live="polite"></p>
+  <form id="compose" hidden>
+    <p id="replying" hidden>
+      <span id="replying-to"></span>
+      <button type="button" id="cancel">Cancel reply</button>
+    </p>
+    <label for="text">Your comment</label>
+    <textarea id="text" rows="4" maxlength="2000" required
+      aria-describedby="identity"></textarea>
+    <p class="tag" id="identity"></p>
+    <button type="submit" id="post">Post</button>
+  </form>
+  <section aria-labelledby="comments-title">
+    <h2 id="comments-title">Comments</h2>
+    <div id="comments"></div>
+  </section>
+  <details id="muted">
+    <summary>Muted authors</summary>
+    <div id="muted-list"></div>
+  </details>
+</main>
+</body>
+</html>

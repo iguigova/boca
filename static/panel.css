@@ -1,0 +1,39 @@
+/* The side panel is narrow, so the label column of brand.css collapses
+   into one column and the title shrinks to fit. */
+main { padding: 16px; }
+header { margin-bottom: 12px; }
+h1 { font-size: 24px; }
+section > h2 { font-size: 13px; font-weight: 400; color: var(--link);
+  margin: 24px 0 6px; padding-bottom: 3px; border-bottom: 1px solid var(--hair); }
+section { display: block; margin: 0; }
+#page { overflow-wrap: anywhere; font-size: 13px; }
+#status, #identity { color: var(--muted); font-size: 13px; margin: 0; }
+
+ol { list-style: none; padding-left: 0; margin: 0; }
+ol ol { padding-left: 14px; border-left: 2px solid var(--hair); }
+article { padding: 8px 0; }
+article header { border: 0; padding: 0; margin: 0; display: block;
+  color: var(--muted); font-size: 12px; }
+.author { font-family: var(--mono); color: var(--ink); }
+.text { white-space: pre-wrap; overflow-wrap: anywhere; margin: 4px 0; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; }
+
+button { font: inherit; font-size: 13px; color: var(--link); background: none;
+  border: 1px solid var(--hair); border-radius: 4px; padding: 0 12px;
+  min-height: 44px; cursor: pointer; }
+button:hover { border-color: var(--link); }
+button[type="submit"] { color: var(--bg); background: var(--link);
+  border-color: var(--link); }
+
+form { margin-top: 16px; display: grid; gap: 6px; }
+label { font-size: 13px; }
+textarea { font: inherit; color: var(--ink); background: var(--bg);
+  border: 1px solid var(--muted); border-radius: 4px; padding: 8px;
+  width: 100%; resize: vertical; }
+#replying { display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  margin: 0; font-size: 13px; }
+#replying[hidden] { display: none; }
+
+details { margin-top: 20px; font-size: 13px; }
+summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+details ul { list-style: none; padding-left: 0; }

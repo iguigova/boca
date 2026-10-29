@@ -1,0 +1,27 @@
+{
+  "name": "boca",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Comments on any web page, carried by public Nostr relays: no server, no account, nothing to sign up for.",
+  "homepage": "https://iguigova.github.io/boca/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iguigova/boca.git"
+  },
+  "author": "Ilka Guigova",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "linkedom": "0.18.13"
+  },
+  "scripts": {
+    "test": "node --test --experimental-test-coverage --test-coverage-include='src/**' --test-coverage-lines=100 'test/*.test.js'",
+    "build": "rm -rf dist && esbuild src/main.js src/background.js --bundle --format=esm --target=chrome120 --outdir=dist && cp -r static/. dist/ && curl -fsS https://iguigova.github.io/brand.css -o dist/brand.css",
+    "package": "npm run build && cd dist && rm -f ../boca.zip && zip -qr ../boca.zip ."
+  }
+}
