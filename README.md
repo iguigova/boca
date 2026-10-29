@@ -24,9 +24,19 @@ the comments on that page and follows you as you switch tabs.
   The panel says which relays did not answer.
 - **Your key** is made in the browser the first time the panel opens and
   stays in the extension's local storage. It signs your comments, and its
-  first eight hex digits are the name others see.
-- **Muting** an author hides their comments in your panel. The list stays
-  on your computer.
+  first eight hex digits are the name others see. Under **Your key** you
+  can show it as an `nsec` to keep a copy, or paste an `nsec` (or 64 hex
+  digits) to post as another key.
+- **A signer extension** you already use can sign
+  instead ([NIP-07](https://github.com/nostr-protocol/nips/blob/master/07.md)).
+  A signer offers `window.nostr` only to web pages, so boca asks it through
+  the page in the active tab. Choosing it asks Chrome for access to web
+  pages, and everything the signer returns is checked before it is used.
+- **Muting** an author hides their comments. The mute list is your
+  [NIP-51](https://github.com/nostr-protocol/nips/blob/master/51.md) list,
+  kind 10000, saved to the relays, so it follows your key to other devices
+  and other Nostr clients. A change keeps the hashtags, words and private
+  items other clients put in the list.
 
 What leaves your computer, and what does not, is stated in
 [PRIVACY.md](PRIVACY.md).
@@ -46,8 +56,11 @@ Then open `chrome://extensions`, turn on Developer mode, choose
 ## Edges
 
 - A comment cannot be edited or deleted once a relay has it.
-- The key lives only in this browser profile. Removing the extension or
-  clearing its storage makes a new key and a new name.
+- boca's key lives only in this browser profile. Removing the extension or
+  clearing its storage makes a new key and a new name, unless you kept the
+  `nsec`.
+- A signer extension is reached through the page in the active tab, so it
+  works only on pages where that signer runs.
 - A relay keeps what it chooses. Comments can disappear if every relay
   drops them.
 - Comments are plain text, as NIP-22 requires: links are not clickable and
@@ -62,9 +75,11 @@ npm run build     # dist/: the bundle, static/ and the published brand.css
 npm run package   # boca.zip, for the Chrome Web Store
 ```
 
-The code is plain ES modules in `src/`. The only runtime dependencies are
+The code is plain ES modules in `src/`. The runtime dependencies are
 `@noble/curves` and `@noble/hashes`, for the Schnorr signatures and the
-sha256 ids.
+sha256 ids, and `@scure/base`, for `nsec` and `npub`.
+
+The icon is public domain, from publicdomainvectors.org.
 
 ## Licence
 

@@ -54,8 +54,7 @@ function acknowledge(id) {
     };
 }
 
-function query(open, page, relay) {
-    const filter = { kinds: [COMMENT], "#I": [page] };
+function query(open, filter, relay) {
     const message = ["REQ", SUBSCRIPTION, filter];
     return exchange(open, relay, message, collect([]));
 }
@@ -76,9 +75,13 @@ async function ask(relays, call) {
     return { values: answered.map((r) => r.value), failed: failed };
 }
 
-async function fetchcomments(open, relays, page) {
-    const { values, failed } = await ask(relays, (r) => query(open, page, r));
+async function fetchevents(open, relays, filter) {
+    const { values, failed } = await ask(relays, (r) => query(open, filter, r));
     return { events: values.flat(), failed: failed };
+}
+
+function fetchcomments(open, relays, page) {
+    return fetchevents(open, relays, { kinds: [COMMENT], "#I": [page] });
 }
 
 async function publish(open, relays, event) {
@@ -86,4 +89,4 @@ async function publish(open, relays, event) {
     return { failed: failed };
 }
 
-export { TIMEOUT, fetchcomments, publish };
+export { TIMEOUT, fetchevents, fetchcomments, publish };

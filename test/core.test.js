@@ -8,8 +8,15 @@ import {
 } from "../src/event.js";
 import { TIMEOUT, fetchcomments, publish } from "../src/relay.js";
 import { thread, count } from "../src/thread.js";
-import { secretof, mutedof, mute, unmute } from "../src/store.js";
-import { relays, storagearea } from "./fakes.js";
+import {
+    secretof, setsecret, signingof, setsigning, mutelistof, setmutelist
+} from "../src/store.js";
+import { npub, nsec, secretfrom } from "../src/keys.js";
+import {
+    MUTELIST, mutedin, withmute, withoutmute, newest
+} from "../src/mutes.js";
+import { localsigner, nip07signer, signerpubkey } from "../src/signer.js";
+import { relays, storagearea, scriptingwith, nostrof } from "./fakes.js";
 
 const PAGE = "https://example.com/post?id=7";
 const ADA = newsecret();
@@ -208,18 +215,136 @@ test("muted authors are dropped and their repliers stand at the top",
 
 // --- store ------------------------------------------------------------------
 
-test("the secret is made once and kept", async () => {
+test("the secret is made once, kept, and can be replaced", async () => {
     const area = storagearea();
     const made = await secretof(area);
     assert.match(made, /^[0-9a-f]{64}$/);
     assert.equal(await secretof(area), made);
+    await setsecret(area, ADA);
+    assert.equal(await secretof(area), ADA);
 });
 
-test("muting and unmuting change the muted set", async () => {
+test("signing is local until a signer is chosen", async () => {
     const area = storagearea();
-    assert.deepEqual(await mutedof(area), new Set());
-    await mute(area, "a");
-    await mute(area, "b");
-    await unmute(area, "a");
-    assert.deepEqual(await mutedof(area), new Set(["b"]));
+    assert.deepEqual(await signingof(area), { by: "local" });
+    await setsigning(area, { by: "nip07", pubkey: "ab" });
+    assert.deepEqual(await signingof(area), { by: "nip07", pubkey: "ab" });
 });
+
+test("the kept mute list is one author's", async () => {
+    const area = storagearea();
+    const list = sign(ADA, withmute(undefined, "b".repeat(64), 100));
+    assert.equal(await mutelistof(area, pubkeyof(ADA)), undefined);
+    await setmutelist(area, list);
+    assert.equal(await mutelistof(area, pubkeyof(ADA)), list);
+    assert.equal(await mutelistof(area, pubkeyof(GRACE)), undefined);
+});
+
+// --- keys -------------------------------------------------------------------
+
+test("keys read and write as NIP-19 bech32", () => {
+    // NIP-19's own example.
+    const hex = "3bf0c63fcb93463407af97a5e5ee64fa"
+        + "883d107ef9e558472c4eb9aaaefa459d";
+    assert.equal(npub(hex), "npub180cvv07tjdrrgpa0j7j7tmnyl2yr6yr7l8j4s3"
+        + "evf6u64th6gkwsyjh6w6");
+    assert.equal(secretfrom(nsec(ADA)), ADA);
+    assert.equal(secretfrom(` ${ADA.toUpperCase()} `), ADA);
+});
+
+test("anything but a usable secret key is refused", () => {
+    assert.throws(() => secretfrom(npub(pubkeyof(ADA))),
+        /an npub is not a secret key/);
+    assert.throws(() => secretfrom("hello"));
+    assert.throws(() => secretfrom("0".repeat(64)));
+});
+
+// --- mutes ------------------------------------------------------------------
+
+const BOB = "b".repeat(64);
+const EVE = "e".repeat(64);
+
+test("a mute list is NIP-51's kind 10000 with p tags", () => {
+    const list = withmute(undefined, BOB, 100);
+    assert.deepEqual(list, {
+        kind: MUTELIST, created_at: 100, tags: [["p", BOB]], content: ""
+    });
+    assert.deepEqual(mutedin(list), new Set([BOB]));
+    assert.deepEqual(mutedin(undefined), new Set());
+});
+
+test("a change keeps the tags and content other clients wrote", () => {
+    const theirs = sign(ADA, {
+        kind: MUTELIST, created_at: 500, content: "encrypted",
+        tags: [["t", "spam"], ["p", BOB], ["word", "crypto"]]
+    });
+    const added = withmute(theirs, EVE, 100);
+    assert.deepEqual(added.tags,
+        [["t", "spam"], ["p", BOB], ["word", "crypto"], ["p", EVE]]);
+    assert.equal(added.content, "encrypted");
+    assert.equal(added.created_at, 501);
+    const removed = withoutmute(theirs, BOB, 900);
+    assert.deepEqual(removed.tags, [["t", "spam"], ["word", "crypto"]]);
+    assert.equal(removed.created_at, 900);
+});
+
+test("the newest valid list by its author wins", () => {
+    const old = sign(ADA, withmute(undefined, BOB, 100));
+    const fresh = sign(ADA, withmute(undefined, EVE, 200));
+    const foreign = sign(GRACE, withmute(undefined, BOB, 300));
+    const forged = { ...fresh, created_at: 400 };
+    const me = pubkeyof(ADA);
+    assert.equal(newest(me, [old, fresh, foreign, forged, undefined]), fresh);
+    assert.equal(newest(me, []), undefined);
+});
+
+// --- signers ----------------------------------------------------------------
+
+test("the local signer signs with the kept key", async () => {
+    const area = storagearea({ secret: ADA });
+    const signer = localsigner(area);
+    assert.equal(await signer.pubkey(), pubkeyof(ADA));
+    const event = await signer.sign(comment(PAGE, "hi", 100));
+    assert.equal(event.pubkey, pubkeyof(ADA));
+    assert.equal(valid(event), true);
+});
+
+test("a NIP-07 signer is asked through the page in the tab", async () => {
+    const scripting = scriptingwith(nostrof(GRACE));
+    const pubkey = await signerpubkey(scripting, 7);
+    assert.equal(pubkey, pubkeyof(GRACE));
+    const signer = nip07signer(scripting, () => 7, pubkey);
+    assert.equal(await signer.pubkey(), pubkey);
+    const event = await signer.sign(comment(PAGE, "hi", 100));
+    assert.equal(event.pubkey, pubkey);
+    const [first] = scripting.calls;
+    assert.deepEqual([first.target, first.world, first.args],
+        [{ tabId: 7 }, "MAIN", ["pubkey", null]]);
+});
+
+test("a page without a signer, or a refusing one, says so", async () => {
+    await assert.rejects(signerpubkey(scriptingwith(undefined), 7),
+        /no NIP-07 signer on this page/);
+    const refusing = { getPublicKey: async () => { throw new Error("no"); } };
+    await assert.rejects(signerpubkey(scriptingwith(refusing), 7), /^Error: no$/);
+    const odd = { getPublicKey: async () => { throw "denied"; } };
+    await assert.rejects(signerpubkey(scriptingwith(odd), 7), /denied/);
+    const blank = { getPublicKey: async () => "npub1..." };
+    await assert.rejects(signerpubkey(scriptingwith(blank), 7),
+        /the signer gave no public key/);
+});
+
+test("an event a signer returns for another key or forged is refused",
+    async () => {
+        const signer = nip07signer(
+            scriptingwith(nostrof(GRACE)), () => 7, pubkeyof(ADA));
+        await assert.rejects(signer.sign(comment(PAGE, "hi", 100)),
+            /does not check out/);
+        const forging = {
+            signEvent: async (u) => ({ ...sign(GRACE, u), content: "x" })
+        };
+        const tricked = nip07signer(
+            scriptingwith(forging), () => 7, pubkeyof(GRACE));
+        await assert.rejects(tricked.sign(comment(PAGE, "hi", 100)),
+            /does not check out/);
+    });

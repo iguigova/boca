@@ -32,7 +32,40 @@
   </section>
   <details id="muted">
     <summary>Muted authors</summary>
+    <p class="note">Your mute list is saved to the relays, so it follows
+      your key to any Nostr client.</p>
     <div id="muted-list"></div>
+  </details>
+  <details id="key">
+    <summary>Your key</summary>
+    <label for="npub">Your public key</label>
+    <input id="npub" readonly>
+    <fieldset>
+      <legend>Sign with</legend>
+      <div class="choice">
+        <input type="radio" name="signing" id="signing-local" value="local">
+        <label for="signing-local">The key boca keeps in this browser</label>
+      </div>
+      <div class="choice">
+        <input type="radio" name="signing" id="signing-nip07" value="nip07">
+        <label for="signing-nip07">A Nostr signer extension (NIP-07),
+          reached through the page you are on</label>
+      </div>
+    </fieldset>
+    <div id="local-key">
+      <button type="button" id="reveal">Show secret key</button>
+      <label for="nsec" class="visually-hidden">Your secret key</label>
+      <input id="nsec" readonly hidden aria-describedby="nsec-note">
+      <p class="note" id="nsec-note">Keep a copy somewhere safe. Anyone
+        who has it can post as you.</p>
+      <label for="import">Use another secret key (nsec or hex)</label>
+      <input id="import" autocomplete="off" spellcheck="false"
+        aria-describedby="import-note import-error">
+      <p class="note" id="import-note">The current key is lost unless you
+        kept a copy.</p>
+      <p class="error" id="import-error" role="alert"></p>
+      <button type="button" id="use">Use this key</button>
+    </div>
   </details>
 </main>
 </body>

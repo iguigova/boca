@@ -4,10 +4,12 @@
 // shows that page.
 
 import { commentable, pageof } from "./page.js";
-import { comment, reply, sign, pubkeyof } from "./event.js";
+import { comment, reply } from "./event.js";
 import { fetchcomments, publish } from "./relay.js";
 import { thread, count } from "./thread.js";
-import { secretof, mutedof, mute, unmute } from "./store.js";
+import { mutedin, withmute, withoutmute } from "./mutes.js";
+import { identify, syncmutes, changemute, wireaccount } from "./account.js";
+import { say, unreached } from "./status.js";
 import { label, list, mutedlist } from "./view.js";
 
 const RELAYS = [
@@ -21,22 +23,20 @@ const RELAYS = [
 function panel(env) {
     const doc = env.doc;
     const byid = (id) => doc.getElementById(id);
-    return {
+    const p = {
         env: env,
         area: env.chrome.storage.local,
         byid: byid,
+        tabid: undefined,
         page: null,
         events: [],
-        parent: null
+        parent: null,
+        signer: null,
+        me: null,
+        mutelist: undefined
     };
-}
-
-function say(p, text) {
-    p.byid("status").textContent = text;
-}
-
-function unreached(failed) {
-    return failed.length > 0 ? ` ${failed.join(", ")} did not answer.` : "";
+    p.draw = () => draw(p);
+    return p;
 }
 
 function counted(n) {
@@ -45,23 +45,20 @@ function counted(n) {
 
 // --- drawing ----------------------------------------------------------------
 
-async function draw(p) {
-    const muted = await mutedof(p.area);
+function draw(p) {
+    const muted = mutedin(p.mutelist);
     const roots = thread(p.page, muted, p.events);
     const actions = {
         reply: (event) => replyto(p, event),
-        mute: (pubkey) => change(p, mute, pubkey)
+        mute: (pubkey) =>
+            changemute(p, withmute, pubkey, `Muted ${label(pubkey)}`)
     };
     p.byid("comments").replaceChildren(list(p.env.doc, roots, actions));
-    const unmuting = (pubkey) => change(p, unmute, pubkey);
+    const unmuting = (pubkey) =>
+        changemute(p, withoutmute, pubkey, `Unmuted ${label(pubkey)}`);
     p.byid("muted-list")
         .replaceChildren(mutedlist(p.env.doc, muted, unmuting));
     return count(roots);
-}
-
-async function change(p, how, pubkey) {
-    await how(p.area, pubkey);
-    await draw(p);
 }
 
 function replyto(p, event) {
@@ -102,7 +99,7 @@ async function load(p) {
             p.env.open, p.env.relays, page);
         if (p.page !== page) return;
         p.events = events;
-        say(p, counted(await draw(p)) + unreached(failed));
+        say(p, counted(draw(p)) + unreached(failed));
     } catch (error) {
         if (p.page !== page) return;
         say(p, `Could not load comments: ${error.message}.`);
@@ -121,14 +118,14 @@ function drafted(p, text) {
 async function post(p) {
     const text = p.byid("text").value.trim();
     if (text === "") return;
-    const event = sign(await secretof(p.area), drafted(p, text));
     say(p, "Posting…");
     try {
+        const event = await p.signer.sign(drafted(p, text));
         const { failed } = await publish(p.env.open, p.env.relays, event);
         p.events = [...p.events, event];
         p.byid("text").value = "";
         cancel(p);
-        await draw(p);
+        draw(p);
         say(p, "Posted." + unreached(failed));
     } catch (error) {
         say(p, `Not posted: ${error.message}. Your text is still here.`);
@@ -140,13 +137,8 @@ async function post(p) {
 async function current(p) {
     const tabs = p.env.chrome.tabs;
     const [tab] = await tabs.query({ active: true, currentWindow: true });
+    p.tabid = tab?.id;
     return show(p, tab?.url ?? "");
-}
-
-async function identify(p) {
-    const who = label(pubkeyof(await secretof(p.area)));
-    p.byid("identity").textContent =
-        `Comments are public and stay on the relays. You post as ${who}.`;
 }
 
 function listen(p, windowid) {
@@ -156,6 +148,7 @@ function listen(p, windowid) {
     });
     tabs.onUpdated.addListener((_, change, tab) => {
         if (tab.active && tab.windowId === windowid && change.url) {
+            p.tabid = tab.id;
             show(p, change.url);
         }
     });
@@ -168,10 +161,12 @@ async function start(env) {
         return post(p);
     };
     p.byid("cancel").onclick = () => cancel(p);
+    wireaccount(p);
     const win = await env.chrome.windows.getCurrent();
     listen(p, win.id);
     await identify(p);
     await current(p);
+    await syncmutes(p);
     return p;
 }
 

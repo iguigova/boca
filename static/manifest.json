@@ -20,5 +20,6 @@
     "side_panel": {
         "default_path": "panel.html"
     },
-    "permissions": ["sidePanel", "storage", "tabs"]
+    "permissions": ["sidePanel", "storage", "tabs", "scripting"],
+    "optional_host_permissions": ["<all_urls>"]
 }

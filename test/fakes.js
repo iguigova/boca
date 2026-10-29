@@ -1,5 +1,8 @@
 // Stand-ins for the browser: a relay socket that answers from a script,
-// and a chrome.storage area held in a Map.
+// a chrome.storage area held in a Map, and a page whose NIP-07 signer is
+// reached the way chrome.scripting reaches it.
+
+import { sign, pubkeyof } from "../src/event.js";
 
 // answer(message, socket) is called with each message the client sends.
 // A relay named in refuse errors instead of opening, one in silent never
@@ -42,4 +45,26 @@ function storagearea(initial = {}) {
     };
 }
 
-export { relays, storagearea };
+// The injected function runs with its arguments in a page whose
+// window.nostr is the given signer, or which has none.
+function scriptingwith(nostr) {
+    return {
+        calls: [],
+        executeScript: async function (injection) {
+            this.calls.push(injection);
+            globalThis.window = nostr === undefined ? {} : { nostr: nostr };
+            const result = await injection.func(...injection.args);
+            delete globalThis.window;
+            return [{ result: result }];
+        }
+    };
+}
+
+function nostrof(secret) {
+    return {
+        getPublicKey: async () => pubkeyof(secret),
+        signEvent: async (unsigned) => sign(secret, unsigned)
+    };
+}
+
+export { relays, storagearea, scriptingwith, nostrof };

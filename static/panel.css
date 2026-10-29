@@ -35,5 +35,23 @@ textarea { font: inherit; color: var(--ink); background: var(--bg);
 #replying[hidden] { display: none; }
 
 details { margin-top: 20px; font-size: 13px; }
-summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+summary { cursor: pointer; padding: 12px 0; }
 details ul { list-style: none; padding-left: 0; }
+
+#key { display: block; }
+#key input:not([type="radio"]) { font: 13px var(--mono); color: var(--ink);
+  background: var(--panel); border: 1px solid var(--muted); border-radius: 4px;
+  padding: 8px; width: 100%; min-height: 44px; }
+#key [hidden] { display: none; }
+#key label, #key button { display: block; margin-top: 10px; }
+fieldset { border: 1px solid var(--hair); border-radius: 4px; margin: 12px 0;
+  padding: 4px 10px 10px; }
+legend { font-size: 13px; padding: 0 4px; }
+.choice { display: flex; gap: 8px; align-items: flex-start; }
+.choice input { margin-top: 14px; width: 18px; height: 18px; }
+.choice label { margin-top: 10px; }
+.note { color: var(--muted); font-size: 12px; margin: 4px 0 0; }
+.error { color: var(--ink); font-weight: 700; font-size: 13px; margin: 4px 0 0; }
+.error:empty { display: none; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; }
