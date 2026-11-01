@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "node --test --experimental-test-coverage --test-coverage-include='src/**' --test-coverage-lines=100 'test/*.test.js'",
-    "build": "rm -rf dist && esbuild src/main.js src/background.js --bundle --format=esm --target=chrome120 --outdir=dist && cp -r static/. dist/ && curl -fsS https://iguigova.github.io/brand.css -o dist/brand.css",
+    "build": "rm -rf dist && esbuild src/main.js src/background.js --bundle --format=esm --target=chrome120 --outdir=dist && cp -r static/. dist/ && cp ../brand.css dist/",
     "package": "npm run build && cd dist && rm -f ../boca.zip && zip -qr ../boca.zip ."
   }
 }

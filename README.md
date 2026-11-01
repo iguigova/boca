@@ -71,9 +71,14 @@ Then open `chrome://extensions`, turn on Developer mode, choose
 
 ```sh
 npm test          # the suite, failing below 100% line coverage of src/
-npm run build     # dist/: the bundle, static/ and the published brand.css
+npm run build     # dist/: the bundle, static/ and ../brand.css, the base style
 npm run package   # boca.zip, for the Chrome Web Store
 ```
+
+The build copies `../brand.css`, the base style of every page I make. On my
+machine that is a symlink into the `iguigova.github.io` clone; anywhere else,
+fetch it first, as CI does:
+`curl -fsS https://iguigova.github.io/brand.css -o ../brand.css`.
 
 The code is plain ES modules in `src/`. The runtime dependencies are
 `@noble/curves` and `@noble/hashes`, for the Schnorr signatures and the
