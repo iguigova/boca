@@ -51,7 +51,8 @@ npm run build
 ```
 
 Then open `chrome://extensions`, turn on Developer mode, choose
-**Load unpacked** and pick the `dist` folder. Chrome 120 or later.
+**Load unpacked** and pick the `dist` folder. Chrome 123 or later, for the
+CSS `light-dark()` that brand.css's colours use.
 
 ## Edges
 
