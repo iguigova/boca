@@ -21,4 +21,5 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: curl -fsS https://iguigova.github.io/brand.css -o ../brand.css
+      - run: curl -fsS https://iguigova.github.io/brand.js -o ../brand.js
       - run: npm run build

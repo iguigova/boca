@@ -72,14 +72,15 @@ CSS `light-dark()` that brand.css's colours use.
 
 ```sh
 npm test          # the suite, failing below 100% line coverage of src/
-npm run build     # dist/: the bundle, static/ and ../brand.css, the base style
+npm run build     # dist/: the bundle, static/, ../brand.css and ../brand.js
 npm run package   # boca.zip, for the Chrome Web Store
 ```
 
-The build copies `../brand.css`, the base style of every page I make. On my
-machine that is a symlink into the `iguigova.github.io` clone; anywhere else,
-fetch it first, as CI does:
-`curl -fsS https://iguigova.github.io/brand.css -o ../brand.css`.
+The build copies `../brand.css`, the base style of every page I make, and
+`../brand.js`, the theme switch beside it. On my machine each is a symlink
+into the `iguigova.github.io` clone; anywhere else, fetch them first, as CI
+does: `curl -fsS https://iguigova.github.io/brand.css -o ../brand.css`, and
+the same for `brand.js`.
 
 The code is plain ES modules in `src/`. The runtime dependencies are
 `@noble/curves` and `@noble/hashes`, for the Schnorr signatures and the

@@ -1,6 +1,6 @@
 {
   "name": "boca",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "description": "Comments on any web page, carried by public Nostr relays: no server, no account, nothing to sign up for.",
   "homepage": "https://iguigova.github.io/boca/",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "node --test --experimental-test-coverage --test-coverage-include='src/**' --test-coverage-lines=100 'test/*.test.js'",
-    "build": "rm -rf dist && esbuild src/main.js src/background.js --bundle --format=esm --target=chrome123 --outdir=dist && cp -r static/. dist/ && cp ../brand.css dist/",
+    "build": "rm -rf dist && esbuild src/main.js src/background.js --bundle --format=esm --target=chrome123 --outdir=dist && cp -r static/. dist/ && cp ../brand.css ../brand.js dist/",
     "package": "npm run build && cd dist && rm -f ../boca.zip && zip -qr ../boca.zip ."
   }
 }
