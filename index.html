@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>boca: comments on any web page</title>
+<meta name="description" content="Comments on any web page, in a Chrome side panel, carried by public Nostr relays: no server, no account, nothing to sign up for.">
+<link rel="icon" href="static/icons/boca32.png">
+<link rel="stylesheet" href="../brand.css">
+<script src="../brand.js"></script>
+<style>
+  header { justify-content: flex-start; align-items: center; gap: 16px; }
+  header img { width: 64px; height: 64px; padding: 4px; border-radius: 50%;
+    background: light-dark(transparent, var(--ink)); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="static/icons/boca128.png" alt="">
+    <div>
+      <h1>boca</h1>
+      <p class="tag">You talk, therefore I am.</p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>What it is</h2>
+      <div>
+        <p>Comments on any web page, in a Chrome side panel. Open it on a
+          page and you see what people said about that page, and you can
+          answer.</p>
+        <p>There is no boca server and no account. Comments live on public
+          Nostr relays, so anyone with a Nostr client can read and answer
+          them too.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>How it works</h2>
+      <div>
+        <ul>
+          <li>A page is its address, without the <code>#fragment</code>.</li>
+          <li>A comment is a standard Nostr web comment, so other apps that
+            write them show up in boca, and boca's show up in them.</li>
+          <li>Your key is made in the browser the first time you open the
+            panel. It signs your comments, and you can back it up or use a
+            signer extension instead.</li>
+          <li>Muting an author follows your key to other devices and other
+            Nostr apps.</li>
+        </ul>
+        <p>The <a href="https://github.com/iguigova/boca#readme">README</a>
+          has the details and the limits, and
+          <a href="https://github.com/iguigova/boca/blob/main/PRIVACY.md">PRIVACY.md</a>
+          says what leaves your computer.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Try it</h2>
+      <div>
+        <p>Build it and load it into Chrome 123 or later, as the
+          <a href="https://github.com/iguigova/boca#install">install steps</a>
+          say.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="line"><a href="/">Ilka Guigova</a> · <a href="https://github.com/iguigova/boca">github.com/iguigova/boca</a> · MIT</div>
+    <div class="band" aria-hidden="true"></div>
+  </footer>
+</div>
+</body>
+</html>
