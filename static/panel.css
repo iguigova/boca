@@ -1,7 +1,8 @@
 /* The side panel is narrow, so the label column of brand.css collapses
-   into one column and the title shrinks to fit. */
+   into one column and the title shrinks to fit. The page's address sits
+   under the title, clear of the theme switch in the top corner. */
 main { padding: 16px; }
-header { margin-bottom: 12px; }
+main > header { display: block; margin-bottom: 12px; }
 h1 { font-size: 24px; }
 section > h2 { font-size: 13px; font-weight: 400; color: var(--link);
   margin: 24px 0 6px; padding-bottom: 3px; border-bottom: 1px solid var(--hair); }
