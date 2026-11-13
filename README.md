@@ -19,7 +19,7 @@ the comments on that page and follows you as you switch tabs.
   reply also names the comment it answers. Other clients that write NIP-22
   web comments show up in boca, and boca's show up in them.
 - **The relays** are `nos.lol`, `relay.primal.net` and `offchain.pub`
-  (`RELAYS` in `src/panel.js`). A page's comments are asked for from all
+  (`RELAYS` in `src/relay.js`). A page's comments are asked for from all
   three when the panel shows the page, and a comment is sent to all three.
   The panel says which relays did not answer.
 - **Your key** is made in the browser the first time the panel opens and

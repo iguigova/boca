@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { parseHTML } from "linkedom";
 
-import { start, RELAYS } from "../src/panel.js";
+import { start } from "../src/panel.js";
+import { RELAYS } from "../src/relay.js";
 import { comment, sign, newsecret, pubkeyof } from "../src/event.js";
 import { npub, nsec } from "../src/keys.js";
 import { withmute } from "../src/mutes.js";

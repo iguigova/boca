@@ -7,6 +7,11 @@
 
 import { COMMENT } from "./event.js";
 
+const RELAYS = [
+    "wss://nos.lol",
+    "wss://relay.primal.net",
+    "wss://offchain.pub"
+];
 const TIMEOUT = 8000;
 const SUBSCRIPTION = "boca";
 
@@ -89,4 +94,4 @@ async function publish(open, relays, event) {
     return { failed: failed };
 }
 
-export { TIMEOUT, fetchevents, fetchcomments, publish };
+export { RELAYS, TIMEOUT, fetchevents, fetchcomments, publish };

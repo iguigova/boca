@@ -5,18 +5,12 @@
 
 import { commentable, pageof } from "./page.js";
 import { comment, reply } from "./event.js";
-import { fetchcomments, publish } from "./relay.js";
+import { RELAYS, fetchcomments, publish } from "./relay.js";
 import { thread, count } from "./thread.js";
 import { mutedin, withmute, withoutmute } from "./mutes.js";
 import { identify, syncmutes, changemute, wireaccount } from "./account.js";
 import { say, unreached } from "./status.js";
 import { label, list, mutedlist } from "./view.js";
-
-const RELAYS = [
-    "wss://nos.lol",
-    "wss://relay.primal.net",
-    "wss://offchain.pub"
-];
 
 // --- the panel's state ------------------------------------------------------
 
@@ -170,4 +164,4 @@ async function start(env) {
     return p;
 }
 
-export { RELAYS, start };
+export { start };
